@@ -1,0 +1,7 @@
+SELECT SUM(CASE WHEN CD_STATUS <= 2 THEN 1 ELSE 0 END) AS Pendentes,
+	   SUM(CASE WHEN CD_STATUS <= 2 AND getdate() > DT_ABERTURA THEN 1 ELSE 0 END) AS Atrasados,	   
+	   SUM(CASE WHEN CD_STATUS = 3 THEN 1 ELSE 0 END) AS 'Encerradoc/Atraso',	   
+	   SUM(CASE WHEN CD_STATUS >= 3 THEN 1 ELSE 0 END) AS TotalEncerrados,
+	   AVG(CD_AVALIACAO) As Media 	   
+
+FROM TB_CHAMADO WHERE DT_ABERTURA between @dti and @dtf
